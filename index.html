@@ -35,7 +35,7 @@
 <main>
 
 <h1>Wear This — Privacy Policy</h1>
-<p class="updated">Last updated: 17 August 2026</p>
+<p class="updated">Last updated: 29 August 2026</p>
 
 <p>Wear This analyses your natural colouring from a photo and tells you which colours suit you. This policy explains what it does with your data.</p>
 
@@ -67,9 +67,21 @@
 
 <p>You can remove it by starting a new analysis, deleting the app, or clearing the app's iCloud data from your device settings.</p>
 
-<h2>Sensitive information</h2>
+<h2>Face data</h2>
 
 <p>A photo of your face is sensitive information. Wear This uses it <strong>only</strong> to read the colour of your skin, hair, and eyes for a colour analysis, and a garment photo only to read the garment against your palette. It is <strong>not</strong> used for facial recognition, not used to identify you, not used to build a profile, not used to train any model by us, and not shared with anyone other than the AI provider named above for the purpose of generating your own result.</p>
+
+<p><strong>What face data is collected.</strong> One photograph containing your face, taken with the camera or chosen from your photo library. Wear This does not create, store, or use a faceprint, face template, face mesh, face geometry, or any other biometric identifier, and it never attempts to recognise, match, or authenticate a person.</p>
+
+<p><strong>What happens on your device.</strong> Apple's Vision framework locates the rectangle of the largest face in the photo so the app can sample the average colour of a patch of skin, and Apple's person-instance mask produces a silhouette so colours can be draped behind you. Both run entirely on your device, both produce only a colour and a shape, and neither result is saved or transmitted.</p>
+
+<p><strong>How it is used.</strong> The photo is sent over an encrypted connection to our analysis service and from there to Anthropic's Claude API, which reads the colour of your skin, hair, and eyes and writes your colour analysis. It is used for nothing else: not facial recognition, not identification, not authentication, not profiling, not advertising, and not to train any model by us.</p>
+
+<p><strong>Where it is stored.</strong> Our analysis service runs on Supabase Edge Functions in the United States and holds the photo in memory only for the duration of that single request. It is never written to our database, our file storage, or our logs. The only lasting copy is in the app's private storage on your own device, so your result can be re-coloured without paying for a second analysis. That copy is not synced to iCloud and is not readable by us.</p>
+
+<p><strong>Who it is shared with.</strong> Only Anthropic, PBC, in the United States, which processes the image to generate your own result and does not use API inputs to train its models (<a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>). It is shared with no other third party, sold to no one, and never disclosed to advertisers, data brokers, or analytics providers. Your subscription identifier is sent to RevenueCat to confirm your subscription; no photo or face data is ever sent to RevenueCat.</p>
+
+<p><strong>How long it is retained.</strong> On our servers, for the length of one request and no longer — once the response is returned we hold no copy, so there is nothing for us to retain or delete. On your device, until you start a new analysis, delete the photo, or delete the app; any of those removes it. Garment photos are not retained anywhere, on our servers or on your device.</p>
 
 <h2>What Wear This does not do</h2>
 
