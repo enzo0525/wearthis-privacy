@@ -1,6 +1,11 @@
 # Supabase free-tier projects pause after 7 days with no activity, which once
-# cost Wear This an App Review rejection. One authenticated request a day keeps
-# yoqmoibdpjluqssktihc awake. Delete this if the project moves to a paid plan.
+# cost Wear This an App Review rejection. One real function invocation a day
+# keeps yoqmoibdpjluqssktihc awake. Delete this if the project moves to a paid plan.
+#
+# The empty body is deliberate: `check` validates its input and returns 400 from
+# inside the handler, so the function genuinely runs without spending Anthropic
+# budget. The REST endpoint is no use here — this project exposes no tables, so
+# it 401s before reaching Postgres.
 name: supabase-keepalive
 
 on:
@@ -12,10 +17,13 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping the project
+      - name: Invoke the check function
         run: |
-          code=$(curl -s -o /dev/null -w '%{http_code}' \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "https://yoqmoibdpjluqssktihc.supabase.co/rest/v1/")
-          echo "rest/v1 -> $code"
-          [ "$code" = "200" ] || exit 1
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" -d '{}' \
+            "https://yoqmoibdpjluqssktihc.supabase.co/functions/v1/check")
+          echo "functions/v1/check -> $code"
+          # 400 is the handler rejecting the empty body: the project is awake.
+          # 503/504 means it is paused or down, which is what we are guarding against.
+          [ "$code" = "400" ] || exit 1
